@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Electric Music Global | We Electrify Through Music</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0b0f1a; --bg2:#0e1322; --blue:#4a72c4; --blt:#6b93e0; --bdk:#2f4f9e;
+  --white:#f0f4ff; --gray:#8a94b0; --glt:#1a2035; --bdr:rgba(74,114,196,.2); --bdw:rgba(255,255,255,.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:74px;background:rgba(11,15,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdw);transition:background .3s}
+.logo-wrap{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none}
+.logo-name{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--white);line-height:1.1}
+.logo-name span{color:var(--blt)}
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none}
+.nav-links>li{position:relative}
+.nav-links>li>a,.nav-links>li>span{display:block;padding:8px 14px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);text-decoration:none;cursor:pointer;transition:color .2s;white-space:nowrap;user-select:none}
+.nav-links>li>a:hover,.nav-links>li:hover>span{color:var(--white)}
+.dd{position:absolute;top:calc(100% + 2px);left:0;background:#111828;border:1px solid var(--bdr);border-radius:4px;min-width:220px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s,transform .2s;z-index:300}
+.nav-links>li:hover .dd{opacity:1;pointer-events:all;transform:translateY(0)}
+.dd a{display:block;padding:10px 18px;font-size:12px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);text-decoration:none;border-bottom:1px solid var(--bdw);transition:color .2s,background .2s;cursor:pointer}
+.dd a:last-child{border-bottom:none}
+.dd a:hover{color:var(--blt);background:rgba(74,114,196,.06)}
+.nav-acts{display:flex;align-items:center;gap:10px}
+.btn-login{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);text-decoration:none;padding:8px 16px;border:1px solid var(--bdw);border-radius:3px;transition:color .2s,border-color .2s}
+.btn-login:hover{color:var(--white);border-color:rgba(255,255,255,.25)}
+.btn-apply{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--blue);border:none;padding:10px 22px;border-radius:3px;cursor:pointer;transition:background .2s,transform .15s}
+.btn-apply:hover{background:var(--blt);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:all .3s}
+
+/* ─── PAGES & HERO ─── */
+.page{display:none}
+.page.active{display:block}
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;align-items:center;opacity:0;transition:opacity .9s ease}
+.slide.active{opacity:1}
+.slide-bg{position:absolute;inset:0;transform:scale(1.04);transition:transform 7s ease}
+.slide.active .slide-bg{transform:scale(1)}
+.slide-ov{position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,15,26,.93) 0%,rgba(11,15,26,.55) 55%,transparent 100%)}
+.slide-cnt{position:relative;z-index:2;padding:0 84px;max-width:700px}
+.sn{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.35em;color:var(--blt);text-transform:uppercase;margin-bottom:18px;opacity:0;transform:translateY(8px);transition:opacity .5s .3s,transform .5s .3s}
+.slide.active .sn{opacity:1;transform:translateY(0)}
+.st{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,7.5vw,100px);line-height:.93;letter-spacing:.02em;margin-bottom:22px;opacity:0;transform:translateY(18px);transition:opacity .6s .45s,transform .6s .45s}
+.slide.active .st{opacity:1;transform:translateY(0)}
+.st .ac{color:var(--blt)}
+.sd{font-size:16px;font-weight:300;line-height:1.65;color:rgba(240,244,255,.72);margin-bottom:38px;max-width:500px;opacity:0;transform:translateY(8px);transition:opacity .6s .6s,transform .6s .6s}
+.slide.active .sd{opacity:1;transform:translateY(0)}
+.scta{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--blue);border:none;padding:14px 34px;border-radius:3px;cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .5s .75s,transform .5s .75s,background .2s}
+.slide.active .scta{opacity:1;transform:translateY(0)}
+.scta:hover{background:var(--blt)}
+.sdots{position:absolute;bottom:38px;left:84px;z-index:10;display:flex;gap:10px}
+.dot{width:30px;height:2px;background:rgba(255,255,255,.2);cursor:pointer;transition:background .3s,width .3s}
+.dot.active{background:var(--blt);width:54px}
+
+/* ─── STATS & SECTION ─── */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--bdw);border-bottom:1px solid var(--bdw);background:var(--bg2)}
+.stat{padding:44px 0;text-align:center;border-right:1px solid var(--bdw)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:var(--blt);margin-bottom:6px}
+.stat-l{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gray)}
+.section{padding:100px 84px}
+.sec-lbl{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.38em;text-transform:uppercase;color:var(--blt);margin-bottom:14px}
+.sec-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5vw,68px);line-height:1;margin-bottom:14px}
+.sec-sub{font-size:15px;font-weight:300;color:var(--gray);max-width:500px;line-height:1.65;margin-bottom:60px}
+
+/* ─── SERVICE CARDS ─── */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:2px}
+.svc{position:relative;background:var(--glt);padding:38px 34px 48px;overflow:hidden;cursor:pointer;text-decoration:none;color:var(--white);transition:background .3s;display:block}
+.svc::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.svc:hover{background:#1c2440}
+.svc:hover::after{transform:scaleX(1)}
+.svc-n{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.28em;color:var(--blt);opacity:.65;margin-bottom:22px}
+.svc-icon{width:42px;height:42px;margin-bottom:18px}
+.svc-ttl{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.05em;margin-bottom:10px}
+.svc-desc{font-size:13px;font-weight:300;color:var(--gray);line-height:1.65}
+.svc-arr{position:absolute;bottom:24px;right:24px;font-size:18px;color:var(--blt);opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .25s}
+.svc:hover .svc-arr{opacity:1;transform:translateX(0)}
+
+/* ─── TIERS & NEWSLETTER ─── */
+.tiers-sec{padding:100px 84px;background:var(--bg2);border-top:1px solid var(--bdw)}
+.tiers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:56px}
+.tier{border:1px solid var(--bdw);padding:46px 34px;border-radius:4px;transition:border-color .3s,transform .3s}
+.tier:hover{border-color:var(--blue);transform:translateY(-4px)}
+.tier.feat{border-color:var(--blue);background:rgba(74,114,196,.05)}
+.tier-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--blue);padding:3px 10px;border-radius:2px;margin-bottom:20px}
+.tier-n{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.22em;color:var(--blt);opacity:.6;margin-bottom:14px}
+.tier-ttl{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.05em;margin-bottom:14px}
+.tier-desc{font-size:14px;font-weight:300;color:var(--gray);line-height:1.7;margin-bottom:34px}
+.tier-btn{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:11px 24px;border-radius:3px;cursor:pointer;border:none;transition:all .2s}
+.tier-btn.p{color:#fff;background:var(--blue)}
+.tier-btn.p:hover{background:var(--blt)}
+.tier-btn.s{color:var(--white);border:1px solid var(--bdw);background:none}
+.tier-btn.s:hover{border-color:var(--blue);color:var(--blt)}
+.newsletter{padding:80px 84px;text-align:center;background:var(--bg);border-top:1px solid var(--bdw)}
+.newsletter h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4.5vw,58px);letter-spacing:.04em;margin-bottom:10px}
+.newsletter p{font-size:15px;font-weight:300;color:var(--gray);margin-bottom:34px}
+.nl-form{display:flex;max-width:460px;margin:0 auto}
+.nl-form input{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--bdw);border-right:none;color:var(--white);font-family:'Barlow',sans-serif;font-size:14px;padding:13px 18px;outline:none;border-radius:3px 0 0 3px;transition:border-color .2s}
+.nl-form input::placeholder{color:rgba(255,255,255,.28)}
+.nl-form input:focus{border-color:var(--blue)}
+.nl-form button{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;background:var(--blue);color:#fff;border:none;padding:13px 26px;cursor:pointer;border-radius:0 3px 3px 0;transition:background .2s}
+.nl-form button:hover{background:var(--blt)}
+
+/* ─── FOOTER ─── */
+footer{background:#080c16;border-top:1px solid var(--bdw);padding:64px 84px 38px}
+.footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
+.footer-tag{font-size:13px;font-weight:300;color:var(--gray);line-height:1.75;margin:14px 0 26px}
+.socials{display:flex;gap:10px}
+.soc{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--bdw);border-radius:50%;color:var(--gray);text-decoration:none;transition:color .2s,border-color .2s,background .2s}
+.soc:hover{color:var(--blt);border-color:var(--blue);background:rgba(74,114,196,.08)}
+.foot-col h4{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:18px}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col ul a{font-size:13px;font-weight:300;color:var(--gray);text-decoration:none;cursor:pointer;transition:color .2s}
+.foot-col ul a:hover{color:var(--blt)}
+.footer-btm{border-top:1px solid var(--bdw);padding-top:26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-btm p{font-size:12px;color:rgba(138,148,176,.45)}
+.f-legal{display:flex;gap:18px}
+.f-legal a{font-size:12px;color:rgba(138,148,176,.45);text-decoration:none;transition:color .2s}
+.f-legal a:hover{color:var(--gray)}
+
+/* ─── SERVICE PAGE LAYOUT ─── */
+.spage-hero{padding-top:74px;min-height:340px;display:flex;align-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--bdw)}
+.spage-hero-bg{position:absolute;inset:0}
+.spage-hero-ov{position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,15,26,.95) 0%,rgba(11,15,26,.6) 60%,rgba(11,15,26,.2) 100%)}
+.spage-blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.spage-hero-cnt{position:relative;z-index:2;padding:70px 84px}
+.spage-hero-cnt .sec-lbl{margin-bottom:12px}
+.spage-hero-cnt h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,92px);line-height:.93;letter-spacing:.02em;margin-bottom:18px}
+.spage-hero-cnt p{font-size:17px;font-weight:300;color:rgba(240,244,255,.75);max-width:600px;line-height:1.65}
+.spage-body{padding:80px 84px 100px;background:var(--bg)}
+.feature-num{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.28em;color:var(--blt);opacity:.7;margin-bottom:10px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin-bottom:80px}
+.feat{background:var(--glt);padding:40px 36px;position:relative;overflow:hidden}
+.feat::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.feat:hover::after{transform:scaleX(1)}
+.feat-num{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.28em;color:var(--blt);opacity:.65;margin-bottom:16px}
+.feat-ttl{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.04em;margin-bottom:10px}
+.feat-desc{font-size:13px;font-weight:300;color:var(--gray);line-height:1.65}
+.feat-list{list-style:none;margin-top:10px}
+.feat-list li{font-size:13px;font-weight:300;color:var(--gray);line-height:1.7;padding-left:14px;position:relative}
+.feat-list li::before{content:'—';position:absolute;left:0;color:var(--blt);font-size:11px;top:4px}
+.spage-sub-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,3.5vw,48px);margin-bottom:36px;letter-spacing:.04em}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-bottom:60px}
+.step{border:1px solid var(--bdw);padding:32px 28px;border-radius:4px;position:relative;transition:border-color .3s}
+.step:hover{border-color:var(--blue)}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--blue);opacity:.3;margin-bottom:10px;line-height:1}
+.step-ttl{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--white);margin-bottom:8px}
+.step-desc{font-size:13px;font-weight:300;color:var(--gray);line-height:1.65}
+.cta-band{background:var(--bg2);border:1px solid var(--bdw);border-radius:6px;padding:56px 60px;display:flex;align-items:center;justify-content:space-between;gap:32px;margin-top:20px}
+.cta-band h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,3vw,44px);letter-spacing:.04em}
+.cta-band p{font-size:14px;font-weight:300;color:var(--gray);max-width:400px;margin-top:8px;line-height:1.6}
+.dsp-strip{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:32px 0 56px}
+.dsp{background:var(--glt);border:1px solid var(--bdw);padding:10px 20px;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+.vinyl-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:32px 0 48px}
+.vinyl-swatch{border-radius:50%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;transition:transform .2s,box-shadow .2s;border:3px solid transparent}
+.vinyl-swatch:hover{transform:scale(1.08);box-shadow:0 0 0 2px var(--blt)}
+.vinyl-swatch.active{border-color:var(--blt)}
+.vinyl-inner{border-radius:50%;background:rgba(0,0,0,.45);width:30%;aspect-ratio:1}
+
+/* ─── APPLY PAGE ─── */
+.apply-hero{padding-top:74px;min-height:320px;display:flex;align-items:center;background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 100%);border-bottom:1px solid var(--bdw);position:relative;overflow:hidden}
+.apply-blob{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(74,114,196,.12) 0%,transparent 70%);right:-100px;top:-100px;pointer-events:none}
+.apply-hero-cnt{padding:60px 84px;position:relative;z-index:2}
+.apply-hero-cnt h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,6vw,80px);line-height:.95;letter-spacing:.02em;margin-bottom:18px}
+.apply-hero-cnt p{font-size:16px;font-weight:300;color:var(--gray);max-width:560px;line-height:1.65}
+.apply-body{padding:72px 84px 100px;background:var(--bg)}
+.apply-tabs{display:flex;gap:0;border-bottom:1px solid var(--bdw);margin-bottom:48px;max-width:640px}
+.tab{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);padding:14px 32px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.tab:hover{color:var(--white)}
+.tab.active{color:var(--blt);border-bottom-color:var(--blt)}
+.tab-panel{display:none;max-width:640px}
+.tab-panel.active{display:block}
+.form-panel{background:var(--bg2);border:1px solid var(--bdw);border-radius:6px;padding:44px 40px}
+.form-panel h2{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.05em;margin-bottom:6px}
+.panel-sub{font-size:13px;font-weight:300;color:var(--gray);margin-bottom:32px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.fld label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gray)}
+.fld input,.fld select,.fld textarea{background:rgba(255,255,255,.04);border:1px solid var(--bdw);border-radius:3px;color:var(--white);font-family:'Barlow',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:border-color .2s,background .2s;width:100%;appearance:none;-webkit-appearance:none}
+.fld input::placeholder,.fld textarea::placeholder{color:rgba(255,255,255,.25)}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--blue);background:rgba(74,114,196,.06)}
+.fld select option{background:#111828;color:var(--white)}
+.fld textarea{resize:vertical;min-height:90px}
+.fdiv{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blt);margin:20px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--bdw)}
+.chk{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.chk input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;margin-top:3px;accent-color:var(--blue);cursor:pointer}
+.chk label{font-size:13px;font-weight:300;color:var(--gray);line-height:1.55;cursor:pointer}
+.form-submit{width:100%;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--blue);border:none;padding:16px;border-radius:3px;cursor:pointer;margin-top:16px;transition:background .2s,transform .15s}
+.form-submit:hover{background:var(--blt);transform:translateY(-1px)}
+.form-success{display:none;text-align:center;padding:60px 24px}
+.check-icon{width:64px;height:64px;background:rgba(74,114,196,.15);border:2px solid var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+.form-success h3{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.05em;margin-bottom:10px}
+.form-success p{font-size:14px;font-weight:300;color:var(--gray);line-height:1.7}
+
+/* ─── ABOUT PAGE ─── */
+.about-hero{padding-top:74px;min-height:420px;display:flex;align-items:flex-end;position:relative;overflow:hidden;border-bottom:1px solid var(--bdw)}
+.about-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0b0f1a 0%,#101828 40%,#0e1520 100%)}
+.about-blob1{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(74,114,196,.16) 0%,transparent 70%);top:-200px;right:-150px;border-radius:50%}
+.about-blob2{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(107,147,224,.08) 0%,transparent 70%);bottom:-100px;left:30%;border-radius:50%}
+.about-hero-cnt{position:relative;z-index:2;padding:80px 84px}
+.about-hero-cnt h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,110px);line-height:.88;letter-spacing:.02em;margin-bottom:24px}
+.about-hero-cnt h1 span{color:var(--blt)}
+.about-hero-cnt .tagline{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blt);margin-bottom:0}
+.about-body{padding:80px 84px 100px;background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:80px;align-items:start}
+.about-text p{font-size:16px;font-weight:300;line-height:1.85;color:rgba(240,244,255,.82);margin-bottom:24px}
+.about-text p:last-child{margin-bottom:0}
+.about-text .highlight{font-size:22px;font-weight:600;line-height:1.5;color:var(--white);margin-bottom:28px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em}
+.about-side{position:relative}
+.about-side-card{background:var(--bg2);border:1px solid var(--bdw);border-radius:6px;padding:40px 36px;margin-bottom:16px;position:relative;overflow:hidden}
+.about-side-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:var(--blue)}
+.about-side-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.05em;margin-bottom:10px;color:var(--blt)}
+.about-side-card p{font-size:13px;font-weight:300;color:var(--gray);line-height:1.65}
+.about-values{border-top:1px solid var(--bdw);padding-top:80px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
+.val{background:var(--glt);padding:40px 34px;position:relative;overflow:hidden}
+.val::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.val:hover::after{transform:scaleX(1)}
+.val-num{font-family:'Bebas Neue',sans-serif;font-size:60px;color:var(--blue);opacity:.2;line-height:1;margin-bottom:12px}
+.val-ttl{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.05em;margin-bottom:10px}
+.val-desc{font-size:13px;font-weight:300;color:var(--gray);line-height:1.65}
+
+/* ─── MOBILE MENU ─── */
+.mob-menu{display:none;position:fixed;inset:0;z-index:190;background:rgba(11,15,26,.98);flex-direction:column;align-items:center;justify-content:center;gap:24px;backdrop-filter:blur(16px);overflow-y:auto;padding:80px 24px}
+.mob-menu.open{display:flex}
+.mob-menu a,.mob-menu span{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.08em;color:var(--white);text-decoration:none;cursor:pointer;transition:color .2s}
+.mob-menu a:hover,.mob-menu span:hover{color:var(--blt)}
+.mob-close{position:fixed;top:22px;right:22px;font-size:28px;color:var(--white);cursor:pointer;background:none;border:none;z-index:191}
+.mob-divider{width:40px;height:1px;background:var(--bdw)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  nav{padding:0 24px}
+  .nav-links,.nav-acts{display:none}
+  .hamburger{display:flex}
+  .slide-cnt{padding:0 28px}
+  .sdots{left:28px}
+  .section,.tiers-sec,.apply-body,.spage-body{padding:60px 24px}
+  .spage-hero-cnt,.apply-hero-cnt,.about-hero-cnt,.about-body{padding:48px 24px}
+  .stats-bar{grid-template-columns:repeat(2,1fr)}
+  .stat{border-bottom:1px solid var(--bdw)}
+  .svc-grid,.features-grid,.values-grid{grid-template-columns:1fr}
+  .tiers-grid,.steps-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  footer{padding:48px 24px 32px}
+  .newsletter{padding:60px 24px}
+  .nl-form{flex-direction:column}
+  .nl-form input{border-right:1px solid var(--bdw);border-radius:3px}
+  .nl-form button{border-radius:3px;margin-top:8px}
+  .form-row{grid-template-columns:1fr}
+  .cta-band{flex-direction:column;padding:40px 28px;text-align:center}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .vinyl-grid{grid-template-columns:repeat(3,1fr)}
+  .apply-tabs{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo-wrap" onclick="nav('home')">
+    <svg width="34" height="44" viewBox="0 0 38 50" fill="none"><polygon points="9,1 37,1 31,13 7,13" fill="#4a72c4"/><rect x="16" y="3.5" width="8" height="7" fill="#0b0f1a"/><polygon points="7,15 31,15 25,23 5,23" fill="#4a72c4"/><polygon points="5,25 23,25 15,35 25,35 13,50 8,50 17,37 9,37" fill="#4a72c4"/></svg>
+    <div class="logo-name">Electric <span>Music</span> Global</div>
+  </div>
+
+  <ul class="nav-links">
+    <li><span>Distribute ▾</span>
+      <div class="dd">
+        <a onclick="nav('digital')">Digital Distribution</a>
+        <a onclick="nav('physical')">Physical Distribution</a>
+      </div>
+    </li>
+    <li><span>Manage ▾</span>
+      <div class="dd">
+        <a onclick="nav('rights')">Rights Management</a>
+        <a onclick="nav('publishing')">Publishing Admin & Sync</a>
+        <a onclick="nav('royalties')">Royalties</a>
+      </div>
+    </li>
+    <li><span>Promote ▾</span>
+      <div class="dd">
+        <a onclick="nav('labelsvcs')">Label Services</a>
+      </div>
+    </li>
+    <li><span>About ▾</span>
+      <div class="dd">
+        <a onclick="nav('about')">About Us</a>
+      </div>
+    </li>
+  </ul>
+
+  <div class="nav-acts">
+    <a href="https://dashboard.vydia.com" class="btn-login" target="_blank" rel="noopener">Client Login</a>
+    <button class="btn-apply" onclick="nav('apply')">Apply Now</button>
+  </div>
+
+  <div class="hamburger" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMob()">✕</button>
+  <span onclick="nav('digital');toggleMob()">Digital Distribution</span>
+  <span onclick="nav('physical');toggleMob()">Physical Distribution</span>
+  <div class="mob-divider"></div>
+  <span onclick="nav('rights');toggleMob()">Rights Management</span>
+  <span onclick="nav('publishing');toggleMob()">Publishing & Sync</span>
+  <span onclick="nav('royalties');toggleMob()">Royalties</span>
+  <div class="mob-divider"></div>
+  <span onclick="nav('labelsvcs');toggleMob()">Label Services</span>
+  <span onclick="nav('about');toggleMob()">About Us</span>
+  <div class="mob-divider"></div>
+  <a href="https://dashboard.vydia.com" target="_blank" rel="noopener" onclick="toggleMob()">Client Login</a>
+  <span onclick="nav('apply');toggleMob()" style="color:var(--blt)">Apply Now</span>
+</div>
+
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div style="position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(74,114,196,.13) 0%,transparent 70%);top:-200px;right:-180px;border-radius:50%;filter:blur(80px);pointer-events:none"></div>
+    <div style="position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(107,147,224,.07) 0%,transparent 70%);bottom:-100px;left:25%;border-radius:50%;filter:blur(80px);pointer-events:none"></div>
+
+    <div class="slide active">
+      <div class="slide-bg" style="background:linear-gradient(130deg,#0b0f1a 0%,#101828 50%,#0e1520 100%)"></div>
+      <div class="slide-ov"></div>
+      <div class="slide-cnt">
+        <div class="sn">— 001</div>
+        <h2 class="st">POWERING THE<br/><span class="ac">BUSINESS</span><br/>OF MUSIC</h2>
+        <p class="sd">Distribute, promote, and manage your content with Electric Music Global's cutting-edge technology platform.</p>
+        <button class="scta" onclick="document.getElementById('home-svcs').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg" style="background:linear-gradient(130deg,#080d18 0%,#0c1425 50%,#0b1220 100%)"></div>
+      <div class="slide-ov"></div>
+      <div class="slide-cnt">
+        <div class="sn">— 002</div>
+        <h2 class="st">DIGITAL<br/><span class="ac">DISTRIBUTION</span><br/>WORLDWIDE</h2>
+        <p class="sd">Deliver your music to 200+ global audio and video destinations — from Spotify to Apple Music and beyond.</p>
+        <button class="scta" onclick="nav('digital')">Learn More</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg" style="background:linear-gradient(130deg,#090c16 0%,#0d1420 50%,#0c1218 100%)"></div>
+      <div class="slide-ov"></div>
+      <div class="slide-cnt">
+        <div class="sn">— 003</div>
+        <h2 class="st">RIGHTS &<br/><span class="ac">ROYALTY</span><br/>MANAGEMENT</h2>
+        <p class="sd">Assert rights across all asset types and set up complex royalty splits to track every dollar of your revenue.</p>
+        <button class="scta" onclick="nav('apply')">Apply Now</button>
+      </div>
+    </div>
+
+    <div class="sdots" id="dots">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-n">200+</div><div class="stat-l">Global Destinations</div></div>
+    <div class="stat"><div class="stat-n">50K+</div><div class="stat-l">Artists Worldwide</div></div>
+    <div class="stat"><div class="stat-n">$500M+</div><div class="stat-l">Revenue Tracked</div></div>
+    <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Dedicated Support</div></div>
+  </div>
+
+  <section class="section" id="home-svcs">
+    <div class="sec-lbl">What We Offer</div>
+    <h2 class="sec-ttl">Our Services</h2>
+    <p class="sec-sub">Everything you need to distribute, manage, and grow your music business — all in one platform.</p>
+    <div class="svc-grid">
+      <a class="svc" onclick="nav('digital')"><div class="svc-n">001</div><svg class="svc-icon" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="18" stroke="#4a72c4" stroke-width="1.5" stroke-dasharray="4 2.5"/><path d="M13 21 L21 9 L29 21 L21 33 Z" stroke="#4a72c4" stroke-width="1.5" fill="none"/><circle cx="21" cy="21" r="3.5" fill="#4a72c4"/></svg><div class="svc-ttl">Digital Distribution</div><p class="svc-desc">Deliver content to 200+ global audio and video destinations including Spotify, Apple Music, YouTube and more.</p><span class="svc-arr">→</span></a>
+      <a class="svc" onclick="nav('physical')"><div class="svc-n">002</div><svg class="svc-icon" viewBox="0 0 42 42" fill="none"><rect x="5" y="13" width="32" height="19" rx="2" stroke="#4a72c4" stroke-width="1.5"/><path d="M5 19 L37 19" stroke="#4a72c4" stroke-width="1" stroke-dasharray="3 2"/><circle cx="12" cy="16" r="1.5" fill="#4a72c4"/><circle cx="18" cy="16" r="1.5" fill="#4a72c4" opacity=".5"/></svg><div class="svc-ttl">Physical Distribution</div><p class="svc-desc">Distribute vinyl, CDs, and more via retail and direct-to-consumer channels with worldwide reach.</p><span class="svc-arr">→</span></a>
+      <a class="svc" onclick="nav('rights')"><div class="svc-n">003</div><svg class="svc-icon" viewBox="0 0 42 42" fill="none"><path d="M7 35 L21 7 L35 35 Z" stroke="#4a72c4" stroke-width="1.5" fill="none"/><path d="M13 27 L29 27" stroke="#4a72c4" stroke-width="1.5"/><circle cx="21" cy="19" r="3" fill="#4a72c4"/></svg><div class="svc-ttl">Rights Management</div><p class="svc-desc">Assert and manage rights across all asset types with precision tracking and automated conflict resolution.</p><span class="svc-arr">→</span></a>
+      <a class="svc" onclick="nav('royalties')"><div class="svc-n">004</div><svg class="svc-icon" viewBox="0 0 42 42" fill="none"><rect x="7" y="7" width="11" height="28" rx="1" stroke="#4a72c4" stroke-width="1.5"/><rect x="23" y="15" width="11" height="20" rx="1" stroke="#4a72c4" stroke-width="1.5"/><circle cx="12.5" cy="5" r="2" fill="#4a72c4"/><circle cx="28.5" cy="12" r="2" fill="#4a72c4"/></svg><div class="svc-ttl">Royalty Management</div><p class="svc-desc">Set up complex royalty splits, track revenue in real-time, and automate payouts to artists and collaborators.</p><span class="svc-arr">→</span></a>
+      <a class="svc" onclick="nav('labelsvcs')"><div class="svc-n">005</div><svg class="svc-icon" viewBox="0 0 42 42" fill="none"><path d="M7 29 Q14 13 21 21 Q28 29 35 13" stroke="#4a72c4" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="21" cy="21" r="3" fill="#4a72c4"/></svg><div class="svc-ttl">Label Services</div><p class="svc-desc">Collaborate with our team to market content through playlisting, editorial placements, sync licensing, and more.</p><span class="svc-arr">→</span></a>
+      <a class="svc" onclick="nav('publishing')"><div class="svc-n">006</div><svg class="svc-icon" viewBox="0 0 42 42" fill="none"><path d="M21 7C21 7 9 13 9 23C9 30 14 35 21 35C28 35 33 30 33 23C33 13 21 7 21 7Z" stroke="#4a72c4" stroke-width="1.5" fill="none"/><path d="M15 21 L19 25 L27 17" stroke="#4a72c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="svc-ttl">Publishing Admin & Sync</div><p class="svc-desc">Collect publishing royalties globally and pitch your music for sync placements in film, TV, and advertising.</p><span class="svc-arr">→</span></a>
+    </div>
+  </section>
+
+  <section class="tiers-sec">
+    <div class="sec-lbl">Get Started</div>
+    <h2 class="sec-ttl">Choose Your Path</h2>
+    <p class="sec-sub">Built for artists, labels, and industry professionals at every stage of their journey.</p>
+    <div class="tiers-grid">
+      <div class="tier feat"><div class="tier-badge">Most Popular</div><div class="tier-n">001</div><div class="tier-ttl">Agency</div><p class="tier-desc">For artists, labels, agencies and more. Start distributing content with access to Electric Music Global's all-in-one solution.</p><button class="tier-btn p" onclick="nav('apply')">Request an Invite</button></div>
+      <div class="tier"><div class="tier-n">002</div><div class="tier-ttl">Label Partner</div><p class="tier-desc">For established labels seeking a comprehensive distribution and management solution with advanced royalty tools and a dedicated account team.</p><button class="tier-btn s" onclick="nav('apply')">Learn More</button></div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="sec-lbl" style="text-align:center;margin-bottom:12px">Stay Connected</div>
+    <h2>WE ELECTRIFY THROUGH MUSIC</h2>
+    <p>Subscribe to our newsletter and stay in touch with the latest in music distribution, industry news, and platform updates.</p>
+    <form name="newsletter" method="POST" data-netlify="true" class="nl-form" id="nlForm">
+      <input type="email" name="email" required placeholder="Enter your email address"/>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p id="nlMsg" style="display:none;margin-top:14px;color:var(--blt);font-size:13px;font-weight:500">✓ Thank you! You're now subscribed.</p>
+  </section>
+
+  <div id="home-footer"></div>
+</div>
+
+<div class="page" id="page-digital">
+  <div class="spage-hero">
+    <div class="spage-hero-bg" style="background:linear-gradient(135deg,#0b0f1a 0%,#0d1528 50%,#0b1322 100%)"></div>
+    <div class="spage-blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(74,114,196,.15) 0%,transparent 70%);top:-150px;right:-100px"></div>
+    <div class="spage-hero-ov"></div>
+    <div class="spage-hero-cnt">
+      <div class="sec-lbl">Distribute</div>
+      <h1>DIGITAL<br/>DISTRIBUTION</h1>
+      <p>A Global Ecosystem for Unfettered Creativity. Built at the intersection of creativity and technology, our holistic approach to digital distribution provides unparalleled reach to the architects of culture and sound.</p>
+    </div>
+  </div>
+  <div class="spage-body">
+    <div class="sec-lbl" style="margin-bottom:12px">Our Partners</div>
+    <div class="dsp-strip">
+      <div class="dsp">Spotify</div><div class="dsp">Apple Music</div><div class="dsp">YouTube</div><div class="dsp">Amazon Music</div><div class="dsp">Tidal</div><div class="dsp">Deezer</div><div class="dsp">Pandora</div><div class="dsp">Vevo</div><div class="dsp">Meta / Instagram</div><div class="dsp">TikTok</div><div class="dsp">SoundCloud</div><div class="dsp">+ 190 More</div>
+    </div>
+    <h2 class="spage-sub-h">Our award-winning tech delivers content<br/>on a global scale.</h2>
+    <div class="features-grid">
+      <div class="feat"><div class="feat-num">001</div><div class="feat-ttl">Global Distribution</div><ul class="feat-list"><li>Exclusive access to 200+ global audio and video destinations</li><li>Preferred partner status across the world's leading DSPs including Spotify, YouTube, and Apple Music</li></ul></div>
+      <div class="feat"><div class="feat-num">002</div><div class="feat-ttl">Audio & Video Supply Chain</div><ul class="feat-list"><li>Manage your commercial terms with partners and earn negotiated royalty rates</li><li>Leverage advanced infrastructure to streamline content and metadata ingestion</li></ul></div>
+      <div class="feat"><div class="feat-num">003</div><div class="feat-ttl">Royalties</div><ul class="feat-list"><li>Automated royalty disbursement and accounting across teams</li><li>Transparent reporting amongst multiple stakeholders</li></ul></div>
+      <div class="feat"><div class="feat-num">004</div><div class="feat-ttl">Advanced Data & Analytics</div><ul class="feat-list"><li>View insightful streaming and revenue data from a centralized location</li><li>Access performance metrics from mobile and desktop devices</li></ul></div>
+    </div>
+    <div class="cta-band">
+      <div><h3>Interested in joining our platform?</h3><p>Apply now and get access to Electric Music Global's all-in-one music distribution and management solution.</p></div>
+      <button class="tier-btn p" onclick="nav('apply')" style="white-space:nowrap;flex-shrink:0">Request an Invite</button>
+    </div>
+  </div>
+  <div id="digital-footer"></div>
+</div>
+
+<div class="page" id="page-physical">
+  <div class="spage-hero">
+    <div class="spage-hero-bg" style="background:linear-gradient(135deg,#0b0f1a 0%,#10161e 50%,#0c1218 100%)"></div>
+    <div class="spage-blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(74,114,196,.12) 0%,transparent 70%);bottom:-80px;right:-80px"></div>
+    <div class="spage-hero-ov"></div>
+    <div class="spage-hero-cnt">
+      <div class="sec-lbl">Distribute</div>
+      <h1>PHYSICAL<br/>DISTRIBUTION</h1>
+      <p>Ingenuity in Every Form. Underpinned by a network of world-class partners, Electric Music Global provides physical distribution services from design to delivery.</p>
+    </div>
+  </div>
+  <div class="spage-body">
+    <h2 class="spage-sub-h">From design to your audience's hands.</h2>
+    <div class="features-grid">
+      <div class="feat"><div class="feat-num">001</div><div class="feat-ttl">Creative Direction</div><p class="feat-desc">Select premium products and collaborate on original designs that reflect your artistic vision and brand identity.</p></div>
+      <div class="feat"><div class="feat-num">002</div><div class="feat-ttl">Manufacturing</div><p class="feat-desc">Leverage our exclusive partnerships with a network of premium manufacturers for vinyl, CDs, cassettes, and more.</p></div>
+      <div class="feat"><div class="feat-num">003</div><div class="feat-ttl">Distribution & Retail</div><p class="feat-desc">Reach your audience through D2C and retail partners including Amazon, Walmart, Target, Urban Outfitters, and independent record stores worldwide.</p></div>
+      <div class="feat"><div class="feat-num">004</div><div class="feat-ttl">Promotional Strategy</div><p class="feat-desc">Market products through bespoke promotional campaigns with robust tracking and analytics to ensure a successful launch.</p></div>
+    </div>
+    <h2 class="spage-sub-h">Customize Your Vinyl</h2>
+    <p style="font-size:15px;font-weight:300;color:var(--gray);line-height:1.65;max-width:560px;margin-bottom:28px">Our vinyl customization service allows you to shape each record to reflect your unique style. With premium options and world-class production, ensure every vinyl stands out — visually and sonically.</p>
+    <div class="vinyl-grid" id="vinylGrid">
+      <div class="vinyl-swatch active" style="background:#1a1a1a" onclick="selectVinyl(this,'#1a1a1a','Black')"><div class="vinyl-inner"></div></div>
+      <div class="vinyl-swatch" style="background:#4a72c4" onclick="selectVinyl(this,'#4a72c4','Blue')"><div class="vinyl-inner"></div></div>
+      <div class="vinyl-swatch" style="background:#c44a4a" onclick="selectVinyl(this,'#c44a4a','Red')"><div class="vinyl-inner"></div></div>
+      <div class="vinyl-swatch" style="background:#4a9c8a" onclick="selectVinyl(this,'#4a9c8a','Teal')"><div class="vinyl-inner"></div></div>
+      <div class="vinyl-swatch" style="background:#c4a44a" onclick="selectVinyl(this,'#c4a44a','Mustard')"><div class="vinyl-inner"></div></div>
+      <div class="vinyl-swatch" style="background:#7a7a8a" onclick="selectVinyl(this,'#7a7a8a','Grey')"><div class="vinyl-inner"></div></div>
+    </div>
+    <div id="vinylPreview" style="margin-bottom:48px">
+      <p style="font-size:14px;font-weight:300;color:var(--gray)">Selected: <strong id="vinylColor" style="color:var(--blt)">Black</strong> — Choose from 100+ color and pattern options.</p>
+    </div>
+    <div class="cta-band">
+      <div><h3>Ready to collaborate?</h3><p>Reach out and let's create something unforgettable together. Our team is ready to guide you from concept to delivery.</p></div>
+      <button class="tier-btn p" onclick="nav('apply')" style="white-space:nowrap;flex-shrink:0">Get Started</button>
+    </div>
+  </div>
+  <div id="physical-footer"></div>
+</div>
+
+<div class="page" id="page-rights">
+  <div class="spage-hero">
+    <div class="spage-hero-bg" style="background:linear-gradient(135deg,#0b0f1a 0%,#0f1520 50%,#0b1018 100%)"></div>
+    <div class="spage-blob" style="width:550px;height:550px;background:radial-gradient(circle,rgba(74,114,196,.14) 0%,transparent 70%);top:-120px;right:-60px"></div>
+    <div class="spage-hero-ov"></div>
+    <div class="spage-hero-cnt">
+      <div class="sec-lbl">Manage</div>
+      <h1>RIGHTS<br/>MANAGEMENT</h1>
+      <p>Untethered Ownership for the Global Creative. Assert and manage rights across asset types, ownership splits, territories, and more.</p>
+    </div>
+  </div>
+  <div class="spage-body">
+    <h2 class="spage-sub-h">Complete control over your creative assets.</h2>
+    <div class="features-grid">
+      <div class="feat"><div class="feat-num">001</div><div class="feat-ttl">Customize</div><p class="feat-desc">Tailor ownership of rights for composition, sound recording, and video during the upload process. Set rules for each asset type individually.</p></div>
+      <div class="feat"><div class="feat-num">002</div><div class="feat-ttl">Assert</div><p class="feat-desc">Assert rights and enact specific policies across platforms including YouTube, Meta, Instagram, and more — all from one centralized dashboard.</p></div>
+      <div class="feat"><div class="feat-num">003</div><div class="feat-ttl">Track</div><p class="feat-desc">Track conflicts directly from our platform and leverage our expert team to enact real-time conflict resolution across all territories and platforms.</p></div>
+    </div>
+    <div class="cta-band">
+      <div><h3>Ready to collaborate?</h3><p>Take full control of your rights. Our team will help you set up and manage your rights infrastructure from day one.</p></div>
+      <button class="tier-btn p" onclick="nav('apply')" style="white-space:nowrap;flex-shrink:0">Reach Out</button>
+    </div>
+  </div>
+  <div id="rights-footer"></div>
+</div>
+
+<div class="page" id="page-publishing">
+  <div class="spage-hero">
+    <div class="spage-hero-bg" style="background:linear-gradient(135deg,#0b0f1a 0%,#0e1322 50%,#0b1118 100%)"></div>
+    <div class="spage-blob" style="width:580px;height:580px;background:radial-gradient(circle,rgba(74,114,196,.13) 0%,transparent 70%);top:-100px;right:-80px"></div>
+    <div class="spage-hero-ov"></div>
+    <div class="spage-hero-cnt">
+      <div class="sec-lbl">Manage</div>
+      <h1>PUBLISHING<br/>ADMIN & SYNC</h1>
+      <p>Monetize and Expand Your Reach. Through a comprehensive network of global publishing partners, Electric Music Global manages registration and royalty collection for all clients.</p>
+    </div>
+  </div>
+  <div class="spage-body">
+    <h2 class="spage-sub-h">Publishing Administration</h2>
+    <div class="features-grid" style="margin-bottom:60px">
+      <div class="feat"><div class="feat-num">001</div><div class="feat-ttl">Pub Admin, Simplified</div><p class="feat-desc">Collect performance, mechanical, print, and other publishing income directly through the Electric Music Global platform.</p></div>
+      <div class="feat"><div class="feat-num">002</div><div class="feat-ttl">Global Registration & Licensing</div><p class="feat-desc">Our publishing team will register all of your works to YouTube Content ID as well as global PROs and CMOs such as The MLC, BMI, PRS, and ASCAP.</p></div>
+      <div class="feat"><div class="feat-num">003</div><div class="feat-ttl">Quick & Direct Payments</div><p class="feat-desc">Collect revenue each month, directly through your dashboard, whenever your song is performed, streamed, or reproduced.</p></div>
+    </div>
+    <h2 class="spage-sub-h">Sync Licensing</h2>
+    <p style="font-size:15px;font-weight:300;color:var(--gray);line-height:1.65;max-width:560px;margin-bottom:36px">Electric Music Global sources premier sync opportunities, pitches curated content, and negotiates licensing agreements on behalf of clients.</p>
+    <div class="features-grid">
+      <div class="feat"><div class="feat-num">001</div><div class="feat-ttl">Editorial</div><p class="feat-desc">Get access to exclusive sync opportunities including TV, film, video games, commercials, and more across top entertainment platforms.</p></div>
+      <div class="feat"><div class="feat-num">002</div><div class="feat-ttl">Global</div><p class="feat-desc">Leverage our "all-in" content services, which provides clearance for both the sound recording and underlying composition worldwide.</p></div>
+      <div class="feat"><div class="feat-num">003</div><div class="feat-ttl">Support</div><p class="feat-desc">Work directly with our Sync Team to pitch your curated content to music supervisors and licensing decision-makers globally.</p></div>
+    </div>
+    <div class="cta-band" style="margin-top:20px">
+      <div><h3>Start Pub Admin Submission</h3><p>Ready to start collecting all your publishing royalties? Apply now and our team will handle the rest.</p></div>
+      <button class="tier-btn p" onclick="nav('apply')" style="white-space:nowrap;flex-shrink:0">Start Here</button>
+    </div>
+  </div>
+  <div id="publishing-footer"></div>
+</div>
+
+<div class="page" id="page-royalties">
+  <div class="spage-hero">
+    <div class="spage-hero-bg" style="background:linear-gradient(135deg,#0b0f1a 0%,#0f1828 50%,#0b1420 100%)"></div>
+    <div class="spage-blob" style="width:560px;height:560px;background:radial-gradient(circle,rgba(74,114,196,.14) 0%,transparent 70%);top:-100px;right:-60px"></div>
+    <div class="spage-hero-ov"></div>
+    <div class="spage-hero-cnt">
+      <div class="sec-lbl">Manage</div>
+      <h1>ROYALTIES</h1>
+      <p>Simplified Payouts for Every Collaborator. Streamline royalty processing for artists, songwriters, and their collaborators with complete transparency.</p>
+    </div>
+  </div>
+  <div class="spage-body">
+    <h2 class="spage-sub-h">Powerful royalty management tools.</h2>
+    <div class="features-grid" style="margin-bottom:60px">
+      <div class="feat"><div class="feat-num">001</div><div class="feat-ttl">Simplify</div><p class="feat-desc">Streamline royalty processing for artists, songwriters, and their collaborators with clear transparency at every step of the process.</p></div>
+      <div class="feat"><div class="feat-num">002</div><div class="feat-ttl">Centralized</div><p class="feat-desc">Set up complex royalty splits and track revenue and payouts, all in one centralized dashboard accessible from anywhere.</p></div>
+      <div class="feat"><div class="feat-num">003</div><div class="feat-ttl">Automate</div><p class="feat-desc">Manage and distribute payments accurately and on time via a fully automated system — no manual work required.</p></div>
+      <div class="feat"><div class="feat-num">004</div><div class="feat-ttl">Analyze</div><p class="feat-desc">Access comprehensive monthly reports to track earnings by content, artist, territory, and date for full financial visibility.</p></div>
+    </div>
+    <h2 class="spage-sub-h">How It Works</h2>
+    <div class="steps-grid">
+      <div class="step"><div class="step-num">01</div><div class="step-ttl">Set Up Splits</div><p class="step-desc">Designate royalty splits for each contributor when uploading a new release.</p></div>
+      <div class="step"><div class="step-num">02</div><div class="step-ttl">Invite Contributors</div><p class="step-desc">Invite contributors to the platform where they can receive their funds directly.</p></div>
+      <div class="step"><div class="step-num">03</div><div class="step-ttl">Auto-Distribution</div><p class="step-desc">Royalties will be distributed automatically in accordance with the rules you set up.</p></div>
+      <div class="step"><div class="step-num">04</div><div class="step-ttl">Track & Report</div><p class="step-desc">Track shared revenue with full transparency to stay up-to-date on earnings and manage accounting efforts.</p></div>
+    </div>
+    <div class="cta-band">
+      <div><h3>Ready to get started?</h3><p>Join Electric Music Global and take control of your royalty management with powerful, automated tools.</p></div>
+      <button class="tier-btn p" onclick="nav('apply')" style="white-space:nowrap;flex-shrink:0">Reach Out</button>
+    </div>
+  </div>
+  <div id="royalties-footer"></div>
+</div>
+
+<div class="page" id="page-labelsvcs">
+  <div class="spage-hero">
+    <div class="spage-hero-bg" style="background:linear-gradient(135deg,#0b0f1a 0%,#0d1620 50%,#0b1218 100%)"></div>
+    <div class="spage-blob" style="width:520px;height:520px;background:radial-gradient(circle,rgba(74,114,196,.13) 0%,transparent 70%);top:-100px;right:-60px"></div>
+    <div class="spage-hero-ov"></div>
+    <div class="spage-hero-cnt">
+      <div class="sec-lbl">Promote</div>
+      <h1>LABEL<br/>SERVICES</h1>
+      <p>Electric Music Global collaborates with artists and their teams to craft dynamic promotional campaigns that capture creative intent and stimulate growth.</p>
+    </div>
+  </div>
+  <div class="spage-body">
+    <h2 class="spage-sub-h">Elevate your artistry.</h2>
+    <div class="features-grid" style="margin-bottom:60px">
+      <div class="feat"><div class="feat-num">001</div><div class="feat-ttl">Partners</div><p class="feat-desc">Benefit from our wide network of trusted DSP partnerships with access to exclusive marketing opportunities and editorial placements.</p></div>
+      <div class="feat"><div class="feat-num">002</div><div class="feat-ttl">Editorial</div><p class="feat-desc">Secure editorial placements on top playlists across all major platforms, boosting visibility and attracting new listeners globally.</p></div>
+      <div class="feat"><div class="feat-num">003</div><div class="feat-ttl">Glocal</div><p class="feat-desc">Our approach combines deep local insights with a broad global perspective, fostering meaningful connections between artists and audiences everywhere.</p></div>
+    </div>
+    <h2 class="spage-sub-h">Integrated label services designed to<br/>streamline, support & elevate your success.</h2>
+    <div class="steps-grid">
+      <div class="step"><div class="step-num">01</div><div class="step-ttl">Strategy</div><p class="step-desc">We develop a customized rollout strategy tailored to your release and audience.</p></div>
+      <div class="step"><div class="step-num">02</div><div class="step-ttl">Pitching</div><p class="step-desc">Our editorial team pitches your content to curators, playlist editors, and music supervisors.</p></div>
+      <div class="step"><div class="step-num">03</div><div class="step-ttl">Campaign</div><p class="step-desc">We execute targeted promotional campaigns across digital and social channels.</p></div>
+      <div class="step"><div class="step-num">04</div><div class="step-ttl">Analytics</div><p class="step-desc">Track campaign performance and streaming growth with detailed reporting and insights.</p></div>
+    </div>
+    <div class="cta-band">
+      <div><h3>Ready to get started?</h3><p>Let our Label Services team help you build momentum around your music and reach new audiences worldwide.</p></div>
+      <button class="tier-btn p" onclick="nav('apply')" style="white-space:nowrap;flex-shrink:0">Reach Out Here</button>
+    </div>
+  </div>
+  <div id="labelsvcs-footer"></div>
+</div>
+
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="about-bg"></div>
+    <div class="about-blob1"></div>
+    <div class="about-blob2"></div>
+    <div class="about-hero-cnt">
+      <div class="sec-lbl" style="margin-bottom:16px">Our Story</div>
+      <h1>ABOUT<br/><span>ELECTRIC</span><br/>MUSIC GLOBAL</h1>
+      <p class="tagline">We Electrify Through Music</p>
+    </div>
+  </div>
+  <div class="about-body">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="highlight">Since its inception in 2018, Electric Music Global has been dedicated to providing independent labels, managers, and artists with the infrastructure they need to reach their creative and economic potential.</p>
+        <p>We believe that every creator deserves access to the tools that turn passion into a global business. We understand that the music industry can be complex and overwhelming — that's why we've built a platform that simplifies every step of the journey, from creation to monetization.</p>
+        <p>Electric Music Global has worked with thousands of clients ranging in size, genre, and region. We continue to push the boundaries of distribution, publishing, and content management with an ever-evolving product suite designed for the modern era.</p>
+        <p>We are more than a label; we are a modern media and technology enterprise. Created to revolutionize the way artists create, distribute, and monetize their content and brand, we provide the ultimate bridge between raw talent and international markets.</p>
+      </div>
+      <div class="about-side">
+        <div class="about-side-card">
+          <h3>Revolutionizing the Industry</h3>
+          <p>We are more than a distribution company. Electric Music Global is a modern media and technology enterprise built to transform the way artists reach global markets — providing the ultimate bridge between raw talent and worldwide audiences.</p>
+        </div>
+        <div class="about-side-card">
+          <h3>Founded in 2018</h3>
+          <p>Since our founding, we have grown into a global operation serving thousands of clients across every genre and region. Our technology platform and expert team evolve constantly to meet the demands of the modern music industry.</p>
+        </div>
+        <div class="about-side-card">
+          <h3>Built for Creators</h3>
+          <p>Every product and service we offer is designed with the creator in mind. From advanced royalty management to worldwide distribution, we give artists the tools to build sustainable, global music careers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-values">
+      <div class="sec-lbl">Our Values</div>
+      <h2 class="sec-ttl" style="margin-bottom:0">What Drives Us</h2>
+      <div class="values-grid">
+        <div class="val"><div class="val-num">01</div><div class="val-ttl">Innovation</div><p class="val-desc">We continuously evolve our platform and services to stay ahead of the ever-changing music industry landscape.</p></div>
+        <div class="val"><div class="val-num">02</div><div class="val-ttl">Integrity</div><p class="val-desc">Transparent royalty reporting, honest partnerships, and fair terms are the foundation of everything we do.</p></div>
+        <div class="val"><div class="val-num">03</div><div class="val-ttl">Impact</div><p class="val-desc">We measure success by the creative and economic impact we create for the artists and labels we serve worldwide.</p></div>
+      </div>
+    </div>
+
+    <div class="cta-band" style="margin-top:80px">
+      <div><h3>Ready to Join Us?</h3><p>Become part of our growing community of entrepreneurs, creators, and visionaries.</p></div>
+      <button class="tier-btn p" onclick="nav('apply')" style="white-space:nowrap;flex-shrink:0">Apply Now</button>
+    </div>
+  </div>
+  <div id="about-footer"></div>
+</div>
+
+<div class="page" id="page-apply">
+  <div class="apply-hero">
+    <div class="apply-blob"></div>
+    <div class="apply-hero-cnt">
+      <div class="sec-lbl">Join Us</div>
+      <h1>REQUEST AN INVITE</h1>
+      <p>Join our exclusive community of entrepreneurs, creators, tastemakers, and visionaries. Select your application type below and our team will be in touch within 2–3 business days.</p>
+    </div>
+  </div>
+  <div class="apply-body">
+    <div class="apply-tabs">
+      <div class="tab active" onclick="switchTab('artist')">Artist / Label</div>
+      <div class="tab" onclick="switchTab('label')">Label Partner</div>
+    </div>
+
+    <div class="tab-panel active" id="tab-artist">
+      <div class="form-panel">
+        <h2>Artist / Label Application</h2>
+        <p class="panel-sub">For independent artists, labels, and agencies looking to distribute and manage their music with Electric Music Global.</p>
+        
+        <form name="artist_application" method="POST" data-netlify="true" id="artistForm">
+          <div id="artistFormBody">
+            <div class="fdiv">Personal Information</div>
+            <div class="form-row">
+              <div class="fld"><label>First Name *</label><input type="text" name="first_name" required placeholder="John"/></div>
+              <div class="fld"><label>Last Name *</label><input type="text" name="last_name" required placeholder="Doe"/></div>
+            </div>
+            <div class="fld"><label>Email Address *</label><input type="email" name="email" required placeholder="you@example.com"/></div>
+            <div class="fld"><label>Phone Number</label><input type="tel" name="phone" placeholder="+1 (000) 000-0000"/></div>
+            
+            <div class="fdiv">Artist / Label Info</div>
+            <div class="fld"><label>Artist / Label Name *</label><input type="text" name="artist_name" required placeholder="Your artist or label name"/></div>
+            <div class="fld"><label>Genre *</label>
+              <select name="genre" required><option value="" disabled selected>Select a genre</option><option>Hip-Hop / Rap</option><option>R&amp;B / Soul</option><option>Pop</option><option>Electronic / Dance</option><option>Afrobeats</option><option>Reggae / Dancehall</option><option>Latin</option><option>Rock / Alternative</option><option>Jazz / Blues</option><option>Gospel / Christian</option><option>Country</option><option>Other</option></select>
+            </div>
+            <div class="form-row">
+              <div class="fld"><label>Account Type *</label>
+                <select name="account_type" required><option value="" disabled selected>Select type</option><option>Independent Artist</option><option>Record Label</option><option>Management Company</option><option>Agency</option><option>Music Publisher</option></select>
+              </div>
+              <div class="fld"><label>Catalog Size</label>
+                <select name="catalog_size"><option value="" disabled selected>No. of releases</option><option>1–10</option><option>11–50</option><option>51–200</option><option>200+</option></select>
+              </div>
+            </div>
+            <div class="fld"><label>Website / Social Media</label><input type="url" name="website" placeholder="https://..."/></div>
+            <div class="fld"><label>Tell Us About Yourself</label><textarea name="bio" placeholder="Brief description of your music career, goals, and why you want to join Electric Music Global..."></textarea></div>
+            
+            <div class="fdiv">Services Interested In</div>
+            <div class="chk"><input type="checkbox" id="s1" name="services" value="Digital Distribution"/><label for="s1">Digital Distribution (Spotify, Apple Music, YouTube, etc.)</label></div>
+            <div class="chk"><input type="checkbox" id="s2" name="services" value="Physical Distribution"/><label for="s2">Physical Distribution (Vinyl, CD, Retail)</label></div>
+            <div class="chk"><input type="checkbox" id="s3" name="services" value="Rights Management"/><label for="s3">Rights Management</label></div>
+            <div class="chk"><input type="checkbox" id="s4" name="services" value="Royalty Management"/><label for="s4">Royalty Management & Splits</label></div>
+            <div class="chk"><input type="checkbox" id="s5" name="services" value="Publishing Admin"/><label for="s5">Publishing Admin & Sync Licensing</label></div>
+            <div class="chk"><input type="checkbox" id="s6" name="services" value="Label Services"/><label for="s6">Label Services & Marketing</label></div>
+            <div style="margin-top:16px">
+              <div class="chk"><input type="checkbox" id="aagree" name="agreed_to_terms" required/><label for="aagree">I agree to the <a href="#" style="color:var(--blt)">Terms & Conditions</a> and <a href="#" style="color:var(--blt)">Privacy Policy</a> of Electric Music Global.</label></div>
+            </div>
+            
+            <button type="submit" class="form-submit">Submit Application</button>
+          </div>
+        </form>
+
+        <div class="form-success" id="artist-ok">
+          <div class="check-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4a72c4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>Application Received!</h3>
+          <p>Thank you for applying to Electric Music Global. We've received your application and will review it shortly. Expect a response within 2–3 business days.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-label">
+      <div class="form-panel">
+        <h2>Label Partner Application</h2>
+        <p class="panel-sub">For established labels, distributors, and music companies looking to leverage Electric Music Global's full platform at scale.</p>
+        
+        <form name="label_application" method="POST" data-netlify="true" id="labelForm">
+          <div id="labelFormBody">
+            <div class="fdiv">Company Information</div>
+            <div class="form-row">
+              <div class="fld"><label>First Name *</label><input type="text" name="first_name" required placeholder="Jane"/></div>
+              <div class="fld"><label>Last Name *</label><input type="text" name="last_name" required placeholder="Smith"/></div>
+            </div>
+            <div class="fld"><label>Company / Label Name *</label><input type="text" name="company_name" required placeholder="Your company name"/></div>
+            <div class="fld"><label>Business Email *</label><input type="email" name="email" required placeholder="contact@yourlabel.com"/></div>
+            <div class="fld"><label>Phone Number</label><input type="tel" name="phone" placeholder="+1 (000) 000-0000"/></div>
+            <div class="form-row">
+              <div class="fld"><label>Country</label>
+                <select name="country"><option value="" disabled selected>Select country</option><option>United States</option><option>United Kingdom</option><option>Canada</option><option>Nigeria</option><option>Ghana</option><option>Jamaica</option><option>South Africa</option><option>Brazil</option><option>France</option><option>Germany</option><option>Other</option></select>
+              </div>
+              <div class="fld"><label>Roster Size</label>
+                <select name="roster_size"><option value="" disabled selected>No. of artists</option><option>1–5</option><option>6–20</option><option>21–100</option><option>100+</option></select>
+              </div>
+            </div>
+            <div class="fld"><label>Company Website</label><input type="url" name="website" placeholder="https://yourlabel.com"/></div>
+            <div class="fdiv">Partnership Details</div>
+            <div class="fld"><label>Annual Release Volume</label>
+              <select name="annual_releases"><option value="" disabled selected>Releases per year</option><option>Under 10</option><option>10–50</option><option>50–200</option><option>200+</option></select>
+            </div>
+            <div class="fld"><label>Current Distributor (if any)</label><input type="text" name="current_distributor" placeholder="e.g. DistroKid, TuneCore, CD Baby..."/></div>
+            <div class="fld"><label>What are you looking for?</label><textarea name="partnership_needs" placeholder="Describe your distribution needs, goals, and what you expect from the partnership..."></textarea></div>
+            <div style="margin-top:16px">
+              <div class="chk"><input type="checkbox" id="lagree" name="agreed_to_terms" required/><label for="lagree">I agree to the <a href="#" style="color:var(--blt)">Terms & Conditions</a> and <a href="#" style="color:var(--blt)">Privacy Policy</a> of Electric Music Global.</label></div>
+            </div>
+            
+            <button type="submit" class="form-submit">Submit Partnership Request</button>
+          </div>
+        </form>
+
+        <div class="form-success" id="label-ok">
+          <div class="check-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4a72c4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>Request Received!</h3>
+          <p>Thank you for your interest in partnering with Electric Music Global. Our partnerships team has received your submission and will be in touch within 2–3 business days.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="apply-footer"></div>
+</div>
+
+<template id="footer-tpl">
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="logo-wrap" onclick="nav('home')" style="margin-bottom:0">
+        <svg width="28" height="36" viewBox="0 0 38 50" fill="none"><polygon points="9,1 37,1 31,13 7,13" fill="#4a72c4"/><rect x="16" y="3.5" width="8" height="7" fill="#080c16"/><polygon points="7,15 31,15 25,23 5,23" fill="#4a72c4"/><polygon points="5,25 23,25 15,35 25,35 13,50 8,50 17,37 9,37" fill="#4a72c4"/></svg>
+        <div class="logo-name">Electric <span>Music</span> Global</div>
+      </div>
+      <p class="footer-tag">We electrify through music.<br/>Your global partner for music distribution,<br/>rights management, and artist growth.</p>
+      <div class="socials">
+        <a href="https://www.instagram.com/electricmusicglobal?igsh=MWlldjcyNHZxdWh3Yw==" class="soc" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://www.facebook.com/share/1HLNziX2GW/?mibextid=wwXIfr" class="soc" target="_blank" rel="noopener" title="Facebook"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://x.com/electricmusicg?s=21" class="soc" target="_blank" rel="noopener" title="X / Twitter"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.857L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-col"><h4>Distribute</h4><ul><li><a onclick="nav('digital')">Digital Distribution</a></li><li><a onclick="nav('physical')">Physical Distribution</a></li></ul></div>
+    <div class="foot-col"><h4>Manage</h4><ul><li><a onclick="nav('rights')">Rights Management</a></li><li><a onclick="nav('publishing')">Publishing Admin & Sync</a></li><li><a onclick="nav('royalties')">Royalties</a></li></ul></div>
+    <div class="foot-col"><h4>Company</h4><ul><li><a onclick="nav('about')">About Us</a></li><li><a href="https://dashboard.vydia.com" target="_blank" rel="noopener">Client Login</a></li><li><a onclick="nav('apply')">Apply Now</a></li><li><a href="mailto:contact@electricmusicglobal.com">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-btm">
+    <p>© 2026 Electric Music Global · electricmusicglobal.com</p>
+    <div class="f-legal"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a><a href="mailto:contact@electricmusicglobal.com">Contact</a></div>
+  </div>
+</footer>
+</template>
+
+<script>
+/* ── FOOTER INJECTION ── */
+const footerIds = ['home','digital','physical','rights','publishing','royalties','labelsvcs','about','apply'];
+footerIds.forEach(id => {
+  const el = document.getElementById(id + '-footer');
+  if (el) el.innerHTML = document.getElementById('footer-tpl').innerHTML;
+});
+
+/* ── PAGE NAVIGATION ── */
+function nav(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) pg.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── HERO SLIDER ── */
+let cur = 0;
+const slides = document.querySelectorAll('.slide');
+const dots   = document.querySelectorAll('.dot');
+function goSlide(n) {
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  cur = n;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('active');
+}
+setInterval(() => goSlide((cur + 1) % slides.length), 5500);
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').style.background =
+    window.scrollY > 50 ? 'rgba(11,15,26,.99)' : 'rgba(11,15,26,.95)';
+});
+
+/* ── MOBILE MENU ── */
+function toggleMob() {
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+
+/* ── APPLY TABS ── */
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelector('.tab[onclick="switchTab(\'' + t + '\')"]').classList.add('active');
+  document.getElementById('tab-' + t).classList.add('active');
+}
+
+/* ── VINYL SELECTOR ── */
+function selectVinyl(el, color, name) {
+  document.querySelectorAll('.vinyl-swatch').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('vinylColor').textContent = name;
+}
+
+/* ── AJAX FORM SUBMISSION FOR NETLIFY ── */
+const handleSubmit = (e) => {
+  e.preventDefault(); // Stop the page from reloading
+  const myForm = e.target;
+  const formData = new FormData(myForm);
+  
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString(),
+  })
+    .then(() => {
+      // Hide the form fields and show the success message based on which form was submitted
+      if (myForm.id === 'artistForm') {
+        document.getElementById('artistFormBody').style.display = 'none';
+        document.getElementById('artist-ok').style.display = 'block';
+      } else if (myForm.id === 'labelForm') {
+        document.getElementById('labelFormBody').style.display = 'none';
+        document.getElementById('label-ok').style.display = 'block';
+      } else if (myForm.id === 'nlForm') {
+        myForm.style.display = 'none';
+        document.getElementById('nlMsg').style.display = 'block';
+      }
+    })
+    .catch((error) => alert("There was an error submitting the form. Please try again."));
+};
+
+// Attach the background submission logic to all forms
+document.getElementById("artistForm").addEventListener("submit", handleSubmit);
+document.getElementById("labelForm").addEventListener("submit", handleSubmit);
+document.getElementById("nlForm").addEventListener("submit", handleSubmit);
+
+</script>
+</body>
+</html>

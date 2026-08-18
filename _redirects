@@ -1,0 +1,4 @@
+# SPA fallback so direct/deep links (e.g. /digital-distribution) and search
+# engine crawlers requesting those URLs still receive index.html, which then
+# renders the correct page client-side based on the URL.
+/*    /index.html   200
